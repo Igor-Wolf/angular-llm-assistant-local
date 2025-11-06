@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
-  openaiKey: "SUA_API_KEY_AQUI",
-  openaiUrl: 'https://api.openai.com/v1/responses'
+  apiEndpoint: 'http://localhost:11434/api/chat',
+  role: "Você é um assistente virtual",
+  modelName: "gemma3:12b",
 };

@@ -1,7 +1,7 @@
 # 🧠 NgCortex
 
-NgCortex é um assistente de código inteligente desenvolvido em **Angular** que integra a API da OpenAI para responder perguntas técnicas sobre o framework.  
-Ele permite enviar prompts diretamente da interface e receber respostas em tempo real — tudo 100% front-end.
+NgCortex é um assistente de código inteligente desenvolvido em **Angular** que integra a API da Ollama para responder perguntas.  
+Ele permite enviar prompts diretamente da interface e receber respostas em tempo real.
 
 ---
 
@@ -27,11 +27,17 @@ Acesse:
 
 ---
 
-## 🔑 Configuração da OpenAI API Key
+## 🔑 Configuração do Ollama
 
-1️⃣ Crie uma conta em [https://platform.openai.com/](https://platform.openai.com/)  
-2️⃣ Vá em **View API Keys** → **Create new secret key**  
-3️⃣ Copie sua chave gerada (ex: `sk-xxxxxx`)
+1️⃣ Baixe e instale o app ollama [https://ollama.com/](https://ollama.com/)  
+
+2️⃣ Rode o aplicativo baixado para iniciar o ollama server
+
+3️⃣ Baixe o modelo desejado pelo bash
+```
+ollama run <Modelo do Ollama>
+```
+
 
 Abra o arquivo:  
 ```
@@ -41,13 +47,13 @@ src/environments/environment.ts
 E substitua a linha:
 
 ```ts
-openaiKey: "SUA_API_KEY_AQUI",
+modelName: "gemma3:12b",
 ```
 
 por:
 
 ```ts
-openaiKey: "sk-sua_chave_aqui",
+modelName: "Modelo do Ollama aqui",
 ```
 
 ## 🌗 Funcionalidades
@@ -56,7 +62,6 @@ openaiKey: "sk-sua_chave_aqui",
 ✅ Ícone e **logo personalizados (NgCortex)**  
 ✅ Integração direta com IA  
 ✅ Layout moderno e responsivo  
-✅ Projeto Angular puro (standalone)
 
 ---
 
@@ -65,15 +70,8 @@ openaiKey: "sk-sua_chave_aqui",
 ![NgCortex Logo](./src/assets/ngcortex-logo-white.png)
 
 ---            
-## 🛠️ Próximas melhorias
 
-- Histórico de conversas  
-- Geração automática de testes unitários  
-- Revisão de snippets Angular  
-- Integração com backend seguro para ocultar a API Key  
-
----
 
 ## 📄 Licença
 
-MIT © 2025 — Desenvolvido por [Cheyenne Cattani](https://github.com/cheyennecattani)
+MIT © 2025 — Desenvolvido por [Cheyenne Cattani](https://github.com/cheyennecattani) | Adaptado por [Igor Barbosa](https://github.com/igor-wolf)

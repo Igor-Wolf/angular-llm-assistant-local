@@ -1,34 +1,43 @@
-import { Injectable, signal } from "@angular/core";
-import { environment } from "../../../environment/environment";
+import { Injectable, signal } from '@angular/core';
+import { environment } from '../../../environment/environment';
 export type ChatMsg = {
-  role: "user" | "assistant" | "system";
+  role: 'user' | 'assistant' | 'system';
   content: string;
 };
 
-@Injectable({ providedIn: "root" })
-
+@Injectable({ providedIn: 'root' })
 export class LlmService {
   loading = signal(false);
-  private apiUrl = environment.openaiUrl;
-  private apiKey = environment.openaiKey;
+  private apiUrl = environment.apiEndpoint;
+
   async respond(opts: { system: string; messages: ChatMsg[]; model?: string }) {
     this.loading.set(true);
+    const messages = [
+      { role: 'system', content: opts.system },
+      ...opts.messages,
+    ];
+
     try {
       const r = await fetch(this.apiUrl, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${this.apiKey}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: opts.model || "gpt-4o-mini",
-          input: [{ role: "system", content: opts.system }, ...opts.messages],
-          temperature: 0.3,
+          model: opts.model || environment.modelName,
+          messages: messages,
+          stream: false,
         }),
       });
+
+      if (!r.ok) {
+        const errorText = await r.text();
+        throw new Error(`Erro na API do Ollama: ${r.status} - ${errorText}`);
+      }
+
       const json = await r.json();
-      const text =
-        json.output_text ?? json.output?.[0]?.content?.[0]?.text ?? "";
+      console.log(json);
+      const text = json.message?.content ?? '';
       return text;
     } finally {
       this.loading.set(false);

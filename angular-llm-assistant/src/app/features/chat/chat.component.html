@@ -1,11 +1,8 @@
 <div class="chat-wrapper" [class.dark]="darkMode">
   <header>
     <div class="logo-wrapper">
-      <img
-        [src]="darkMode ? 'assets/ngcortex-logo-white.png' : 'assets/ngcortex-logo-dark.png'"
-        alt="NgCortex Logo"
-        class="logo"
-      />
+      <img [src]="darkMode ? 'assets/ngcortex-logo-white.png' : 'assets/ngcortex-logo-dark.png'" alt="NgCortex Logo"
+        class="logo" />
     </div>
 
     <button class="toggle" (click)="toggleTheme()">
@@ -15,19 +12,14 @@
 
   <section class="intro">
     <p>
-      O <strong>NgCortex</strong> é um assistente de código com IA que ajuda
-      você a entender, revisar e gerar snippets Angular usando modelos da
-      OpenAI. Faça perguntas sobre componentes, pipes, serviços ou testes
-      automatizados — ele responde de forma técnica e direta.
+      O <strong>NgCortex</strong> é um assistente IA que que ajuda a solucionar diversas dúvidas.
     </p>
   </section>
 
   <section class="chat">
-    <textarea
-      [(ngModel)]="input"
-      rows="5"
-      placeholder="Digite sua pergunta sobre Angular..."
-    ></textarea>
+    <textarea [(ngModel)]="inputRole" rows="2"
+      placeholder="Digite o comportamento do assistente. Ex: Atue como um renomado mestre de RPG de mesa..."></textarea>
+    <textarea [(ngModel)]="input" rows="5" placeholder="Digite sua pergunta..."></textarea>
 
     <button class="send" (click)="send()" [disabled]="llm.loading()">
       {{ llm.loading() ? 'Processando...' : 'Enviar' }}
@@ -45,6 +37,7 @@
   </section>
 
   <footer>
-    <p>&#64;Copyright Cheyenne Cattani</p>
+    <p>&#64;Copyright Cheyenne Cattani | Adaptado por Igor Barbosa</p>
+
   </footer>
 </div>
